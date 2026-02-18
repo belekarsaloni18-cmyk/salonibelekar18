@@ -11,4 +11,5 @@
 <artical>
 <h2>Wht use Semantic Tags?</h2>
 <p>They improve accessibility and SEO.</p>
-</article>
+</artical>
+
