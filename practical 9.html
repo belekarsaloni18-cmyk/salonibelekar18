@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+    padding:15px;
+    background:#333;
+    color:white;
+}
+
+/* Responsive Design */
+@media(max-width:768px){
+    .multi-column{
+        column-count:2;
+    }
+}
+
+@media(max-width:480px){
+    .multi-column{
+        column-count:1;
+    }
+
+    nav{
+        flex-direction:column;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>My Responsive Webpage</h1>
+    <p>Using CSS3 Features</p>
+</header>
+
+<nav>
+    <a href="#">Home</a>
+    <a href="#">About</a>
+    <a href="#">Services</a>
+    <a href="#">Contact</a>
+</nav>
+
+<div class="container">
+    <div class="multi-column">
+        
+        <div class="card">
+            <i class="fas fa-laptop-code icon"></i>
+            <h3>Web Development</h3>
+            <p>Learn modern web development using HTML, CSS, and JavaScript.</p>
+        </div>
+
+        <div class="card">
+            <i class="fas fa-mobile-alt icon"></i>
+            <h3>Responsive Design</h3>
+            <p>Create websites that work on all devices using media queries.</p>
+        </div>
+
+        <div class="card">
+            <i class="fas fa-paint-brush icon"></i>
+            <h3>Creative Design</h3>
+            <p>Design attractive layouts using fonts, colors, and animations.</p>
+        </div>
+
+        <div class="card">
+            <i class="fas fa-rocket icon"></i>
+            <h3>Performance</h3>
+            <p>Optimize websites for speed and better user experience.</p>
+        </div>
+
+    </div>
+</div>
+
+<footer>
+    <p>© 2026 My Website</p>
+</footer>
+
+</body>
+</html>
