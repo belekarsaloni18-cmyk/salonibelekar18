@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HTML5 APIs Demo</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #f4f7fa;
+      padding: 30px;
+      color: #222;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      display: grid;
+      gap: 20px;
+    }
+
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    h2 {
+      margin-bottom: 12px;
+    }
+
+    button {
+      padding: 10px 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    #dragBox {
+      width: 140px;
+      padding: 15px;
+      text-align: center;
+      background: #dfefff;
+      border: 2px solid #4a90e2;
+      border-radius: 10px;
+      cursor: grab;
+    }
+
+    #dropZone {
+      margin-top: 15px;
+      width: 100%;
+      min-height: 120px;
+      border: 2px dashed #888;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #fafafa;
+      color: #666;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      margin-top: 10px;
+    }
+
+    p {
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>HTML5 APIs Demo</h1>
+
+  <div class="container">
+
+    <!-- Drag & Drop -->
+    <div class="card">
+      <h2>1. Drag & Drop API</h2>
+      <div id="dragBox" draggable="true" ondragstart="drag(event)">
+        Drag Me
+      </div>
+
+      <div id="dropZone" ondrop="drop(event)" ondragover="allowDrop(event)">
+        Drop Here
+      </div>
+    </div>
+
+    <!-- Geolocation -->
+    <div class="card">
+      <h2>2. Geolocation API</h2>
+      <button onclick="getLocation()">Get My Location</button>
+      <p id="locationResult">Location will appear here.</p>
+    </div>
+
+    <!-- Web Storage -->
+    <div class="card">
+      <h2>3. Web Storage API</h2>
+      <input type="text" id="username" placeholder="Enter your name" />
+      <button onclick="saveData()">Save Name</button>
+      <button onclick="showData()">Show Saved Name</button>
+      <p id="storageResult">Saved data will appear here.</p>
+    </div>
+
+  </div>
+
+  <script>
+    // Drag & Drop
+    function allowDrop(event) {
+      event.preventDefault();
+    }
+
+    function drag(event) {
+      event.dataTransfer.setData("text", event.target.id);
+      event.target.id = "draggedItem";
+    }
+
+    function drop(event) {
+      event.preventDefault();
+      const data = event.dataTransfer.getData("text");
+      const item = document.getElementById("draggedItem");
+      event.target.innerHTML = "";
+      event.target.appendChild(item);
+    }
+
+    // Geolocation
+    function getLocation() {
+      const output = document.getElementById("locationResult");
+
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          function(position) {
+            output.innerHTML =
+              "Latitude: " + position.coords.latitude +
+              "<br>Longitude: " + position.coords.longitude;
+          },
+          function() {
+            output.innerHTML = "Unable to retrieve location.";
+          }
+        );
+      } else {
+        output.innerHTML = "Geolocation is not supported by this browser.";
+      }
+    }
+
+    // Web Storage
+    function saveData() {
+      const name = document.getElementById("username").value;
+      localStorage.setItem("savedName", name);
+      document.getElementById("storageResult").innerHTML = "Name saved successfully!";
+    }
+
+    function showData() {
+      const savedName = localStorage.getItem("savedName");
+      document.getElementById("storageResult").innerHTML =
+        savedName ? "Saved Name: " + savedName : "No data found.";
+    }
+  </script>
+
+</body>
+</html>
